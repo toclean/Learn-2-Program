@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"os"
 	"strconv"
 	"strings"
 )
@@ -15,16 +13,7 @@ func addZeros(originalString string, zerosToAdd int) string {
 	return sb.String() + originalString
 }
 
-func main() {
-	args := os.Args[1:]
-
-	if len(args) < 2 {
-		fmt.Print("2 arguments were not provided")
-	}
-
-	s1 := args[0]
-	s2 := args[1]
-
+func addTwoBinaryStrings(s1 string, s2 string) string {
 	zerosToAdd := 0
 	// Add extra zeros
 	if len(s1) > len(s2) {
@@ -35,8 +24,6 @@ func main() {
 		s1 = addZeros(s1, zerosToAdd)
 	}
 
-	fmt.Printf("s1: %s, s2: %s\n", s1, s2)
-
 	result := ""
 
 	var carry int64
@@ -44,7 +31,7 @@ func main() {
 		digit1, err1 := strconv.ParseInt(string(s1[index]), 10, 64)
 		digit2, err2 := strconv.ParseInt(string(s2[index]), 10, 64)
 		if err1 != nil || err2 != nil {
-			return
+			return ""
 		}
 
 		sum := digit1 + digit2 + carry
@@ -64,5 +51,5 @@ func main() {
 		}
 	}
 
-	fmt.Printf("Result: %s\n", result)
+	return result
 }
